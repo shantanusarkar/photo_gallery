@@ -43,24 +43,24 @@
                     <option>Male</option><option>Female</option>
                 </select>              
                 <input class="btn btn-lg btn-primary btn-block" id="regForm" type="submit" value="Register">
-                        <script>
-    function myFunction() {
-        var pass1 = document.getElementById("password").value;
-        var pass2 = document.getElementById("cpassword").value;
-        if (pass1 != pass2) {
-            alert("Passwords Do not match");
-            document.getElementById("password").style.borderColor = "#E34234";
-            document.getElementById("cpassword").style.borderColor = "#E34234";
-        }
-        else {
-            alert("Passwords Match!!!");
-            document.getElementById("regForm").submit();
-        }
-    }
-       </script>
-            </form>
-            <p>&nbsp;</p>
-            <p>Already a member? <a href="login.jsp">Sign-in</a> to continue</p>
+                 <script>
+                    function myFunction() {
+                        var pass1 = document.getElementById("password").value;
+                        var pass2 = document.getElementById("cpassword").value;
+                        if (pass1 != pass2) {
+                            alert("Passwords Do not match");
+                            document.getElementById("password").style.borderColor = "#E34234";
+                            document.getElementById("cpassword").style.borderColor = "#E34234";
+                        }
+                        else {
+                            alert("Passwords Match!!!");
+                            document.getElementById("regForm").submit();
+                        }
+                    }
+               </script>
+           </form>
+           <p>&nbsp;</p>
+           <p>Already a member? <a href="login.jsp">Sign-in</a> to continue</p>
         </div>
     </body>
 </html>
