@@ -33,34 +33,6 @@
             </div>
         </nav>
         
-        <div class="container">
-            <form class="form-signin" onsubmit="return myFunction()">
-                <input type="text" name="name" class="form-control1" placeholder="Your Name" required autofocus>
-                <input type="email" name="email" class="form-control1" placeholder="Email address" required autofocus>
-                <input type="password" name="password" id="password" class="form-control1" placeholder="Password" required>
-                <input type="password" name="cpassword" id="cpassword" class="form-control1" placeholder="Re-enter Password" required>
-                <select class="select">
-                    <option>Male</option><option>Female</option>
-                </select>              
-                <input class="btn btn-lg btn-primary btn-block" id="regForm" type="submit" value="Register">
-                 <script>
-                    function myFunction() {
-                        var pass1 = document.getElementById("password").value;
-                        var pass2 = document.getElementById("cpassword").value;
-                        if (pass1 != pass2) {
-                            alert("Passwords Do not match");
-                            document.getElementById("password").style.borderColor = "#E34234";
-                            document.getElementById("cpassword").style.borderColor = "#E34234";
-                        }
-                        else {
-                            alert("Passwords Match!!!");
-                            document.getElementById("regForm").submit();
-                        }
-                    }
-               </script>
-           </form>
-           <p>&nbsp;</p>
-           <p>Already a member? <a href="login.jsp">Sign-in</a> to continue</p>
-        </div>
+        
     </body>
 </html>
