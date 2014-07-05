@@ -96,14 +96,14 @@
 String email=(String)request.getSession().getAttribute("emailid");
 Class.forName("oracle.jdbc.driver.OracleDriver"); 
 Connection con=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","system","aezakmi");
-PreparedStatement Ps=con.prepareStatement("select * from photoreg where email=?");
+PreparedStatement Ps=con.prepareStatement("select * from FILE_UPLOAD where email=?");
 Ps.setString(1,email);
 ResultSet rs = Ps.executeQuery();
 while(rs.next())
 {
     String p1=rs.getString(1);
-    String p2=rs.getString(2);
-    String p3=rs.getString(4);
+  //  String p2=rs.getString(2);
+  //  String p3=rs.getString(4);
         %>
         
 <nav class="navbar navbar-inverse" role="navigation">
@@ -145,7 +145,7 @@ while(rs.next())
         <div class="col-sm-3 col-md-2 sidebar">
               <div id="LeftCol">
                   <h3>Profile</h3>
-                <div id="Photo"></div>
+                <div id="Photo"><img class="img-responsive" src="images/<%=p1%>" alt="" /></div>
                     <div id="ProfileOptions">
                         <form action="upload.jsp" method="post" enctype="multipart/form-data">
                             <span><input type="file" name="filename"/></span>
@@ -156,9 +156,9 @@ while(rs.next())
             </div>
             <div id="info">
         <ul class="nav nav-sidebar">
-            <li><strong>Name: </strong><span><%=p1%></span></li>
-            <li><strong>Email: </strong><span><%=p2%></span></li>
-            <li><strong>Gender: </strong><span><%=p3%></span></li>
+            <li><strong>Name: </strong><span></span></li>
+            <li><strong>Email: </strong><span></span></li>
+            <li><strong>Gender: </strong><span></span></li>
           </ul>
             </div>
         </div>
