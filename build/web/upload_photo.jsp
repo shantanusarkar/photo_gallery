@@ -1,21 +1,21 @@
 <%-- 
-    Document   : home
-    Created on : Jul 4, 2014, 4:25:55 PM
+    Document   : profile
+    Created on : Jul 8, 2014, 8:45:13 PM
     Author     : Shantanu
 --%>
 
-<%@page import="java.sql.ResultSet"%>
-<%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.PreparedStatement"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Photo Gallery</title>
-        <link rel="stylesheet" href="bootstrap-3.1.1-dist/css/bootstrap.css" media="screen" type="text/css" />
-        <style>
+        <title>JSP Page</title>
+                <link rel="stylesheet" href="bootstrap-3.1.1-dist/css/bootstrap.css" media="screen" type="text/css" />
+<style>
             .sidebar {
   display: none;
 }
@@ -93,12 +93,20 @@
     margin-left: 250px;
 }
 
+.editbox
+{
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: 20%;
+  margin-left: 40%;
+  margin-top: 0%;
+}
+
         </style>
     </head>
     <body>
-        
-        
-<nav class="navbar navbar-inverse" role="navigation">
+
+        <nav class="navbar navbar-inverse" role="navigation">
    <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" 
          data-target="#example-navbar-collapse">
@@ -111,10 +119,10 @@
    </div>
     <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="home.jsp">Home</a></li>
+            <li ><a href="home.jsp">Home</a></li>
             <li><a href="profile.jsp">Profile</a></li>
-            <li><a href="edit_profile.jsp">Edit Profile</a></li>
-            <li><a href="upload_photo.jsp">Upload</a></li>
+            <li ><a href="edit_profile.jsp">Edit Profile</a></li>
+            <li class="active"><a href="upload_photo.jsp">Upload</a></li>
           </ul>
         </div><!--/.nav-collapse -->
    <div class="collapse navbar-collapse navbar-right" id="example-navbar-collapse">
@@ -166,44 +174,19 @@ while(rs.next())
             </div>
           
         </div>
-         
-
-<div class="home">
-<div class="row">
-    <%
-
-PreparedStatement ws=con.prepareStatement("select * from FILE_UPLOAD");
-
-ResultSet qs = ws.executeQuery();
-while(qs.next())
-{
-    String p1=qs.getString(1);
-//    String p2=qs.getString(3);
-//    String p3=qs.getString(4);
-        %>
-   <div class="col-sm-6 col-md-2">
-      <div class="thumbnail">
-         <img src="images/<%=p1%>" 
-         alt="images/blank-person.png">
-      </div>
-      <div class="caption">
-         <h3></h3>
-         <p></p>
-         <p>
-            <a href="#" class="btn btn-primary" role="button">
-               Download
-            </a> 
-        </p>
-      </div>
-   </div>
-         <%
-                 }
-%>
-</div>
+<div class="editbox">
+    <form action="upload_photo_script.jsp" method="post" enctype="multipart/form-data">
+        <div class="thumbnail"><img src="images/blank-person.png" alt=""></div>
+        <span><input type="file" name="filename"/></span>
+        <input type="text" name="label" class="form-control1" placeholder="Title" required autofocus>
+        <input type="textarea" name="description" class="form-control1" placeholder="Description" required autofocus>                              
+        <center><input class="btn btn-lg btn-primary btn-block" id="regForm" type="submit" value="Upload"></center>
+    </form>
 </div>
           
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    
     </body>
 </html>

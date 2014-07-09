@@ -28,9 +28,9 @@
     </head>
     <body>
                
-        <%      String email=(String)request.getSession().getAttribute("emailid");
+        <%  
         try {
-                String FileToUpload = "", filepath = "";
+                String FileToUpload = "", filepath = "", email="";
                 boolean isMultipart = ServletFileUpload.isMultipartContent(request);
                 if (!isMultipart) {
                 } else {
@@ -47,8 +47,8 @@
                         FileItem item = (FileItem) itr.next();
                         if (item.isFormField()) {
                             String itemName = item.getFieldName();
-
-                        } else {
+                        }
+                        else {
                             String itemName = item.getName();
 
                             //String userFieldName = item.getFieldName();
@@ -65,18 +65,19 @@
 //in case of other borwsers, its just filename
                                         FileToUpload = itemName;
                                     }
-                                    boolean folderMade = (new File("C:/Users/Shantanu/Documents/NetBeansProjects/Registration_app/web/images")).mkdirs();
-                                    filepath = "C:/Users/Shantanu/Documents/NetBeansProjects/Registration_app/web/images/" + FileToUpload;
+                                    boolean folderMade = (new File("C:/Users/Shantanu/Documents/NetBeansProjects/Photo_gallery/web/images")).mkdirs();
+                                    filepath = "C:/Users/Shantanu/Documents/NetBeansProjects/Photo_gallery/web/images/" + FileToUpload;
                                     File savedFile = new File(filepath);
                                     item.write(savedFile);
                                 }
                             }
                         }//else
                     }
+                    email=(String)request.getSession().getAttribute("emailid");
                     Class.forName("oracle.jdbc.driver.OracleDriver");
                     Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "system", "aezakmi");
 
-                    PreparedStatement ps = con.prepareStatement("insert into FILE_UPLOAD  values(?,?)");
+                    PreparedStatement ps = con.prepareStatement("update FILE_UPLOAD set file_u=? where email=?");
                     ps.setString(1,FileToUpload);
                     ps.setString(2, email);
                     int i = ps.executeUpdate();

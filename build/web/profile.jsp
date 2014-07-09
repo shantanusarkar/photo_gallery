@@ -111,9 +111,9 @@
    </div>
     <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="home.jsp">Home</a></li>
-            <li><a href="profile.jsp">Profile</a></li>
-            <li><a href="edit_profile.jsp">Edit Profile</a></li>
+            <li ><a href="home.jsp">Home</a></li>
+            <li class="active"><a href="profile.jsp">Profile</a></li>
+            <li ><a href="edit_profile.jsp">Edit Profile</a></li>
             <li><a href="upload_photo.jsp">Upload</a></li>
           </ul>
         </div><!--/.nav-collapse -->
@@ -172,8 +172,8 @@ while(rs.next())
 <div class="row">
     <%
 
-PreparedStatement ws=con.prepareStatement("select * from FILE_UPLOAD");
-
+PreparedStatement ws=con.prepareStatement("select * from FILE_UPLOAD where email=?");
+ws.setString(1,email);
 ResultSet qs = ws.executeQuery();
 while(qs.next())
 {

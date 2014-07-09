@@ -1,9 +1,9 @@
 <%-- 
-    Document   : upload
-    Created on : Jul 5, 2014, 2:39:25 PM
-    Author     : Shantanu
+Document   : upload
+Created on : Feb 6, 2014, 12:16:00 PM
+Author     : user
 --%>
-<%@page import="sun.font.Script"%>
+
 <%@page import="java.net.SocketException"%>
 <%@page import="java.net.UnknownHostException"%>
 <%@page import="java.io.File"%>
@@ -18,7 +18,6 @@
 <%@page import="java.sql.DriverManager"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="java.sql.Statement"%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -27,10 +26,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-               
-        <%  
+        <%          
         try {
-                String FileToUpload = "", filepath = "", email="";
+                String FileToUpload = "", filepath = "", label="", description="", email="";
                 boolean isMultipart = ServletFileUpload.isMultipartContent(request);
                 if (!isMultipart) {
                 } else {
@@ -47,8 +45,13 @@
                         FileItem item = (FileItem) itr.next();
                         if (item.isFormField()) {
                             String itemName = item.getFieldName();
-                        }
-                        else {
+                             if (itemName.equals("label")) {
+                                label= item.getString();
+                            }
+                            if (itemName.equals("description")) {
+                                description= item.getString();
+                            }
+                        } else {
                             String itemName = item.getName();
 
                             //String userFieldName = item.getFieldName();
@@ -65,8 +68,8 @@
 //in case of other borwsers, its just filename
                                         FileToUpload = itemName;
                                     }
-                                    boolean folderMade = (new File("C:/Users/Shantanu/Documents/NetBeansProjects/Photo_gallery/web/images")).mkdirs();
-                                    filepath = "C:/Users/Shantanu/Documents/NetBeansProjects/Photo_gallery/web/images/" + FileToUpload;
+                                    boolean folderMade = (new File("C:/Users/shantanu/Documents/NetBeansProjects/Registration_app/web/images")).mkdirs();
+                                    filepath = "C:/Users/shantanu/Documents/NetBeansProjects/Registration_app/web/images/" + FileToUpload;
                                     File savedFile = new File(filepath);
                                     item.write(savedFile);
                                 }
@@ -76,16 +79,16 @@
                     email=(String)request.getSession().getAttribute("emailid");
                     Class.forName("oracle.jdbc.driver.OracleDriver");
                     Connection con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "system", "aezakmi");
-
-                    PreparedStatement ps = con.prepareStatement("update FILE_UPLOAD set file_u=? where email=?");
-                    ps.setString(1,FileToUpload);
-                    ps.setString(2, email);
+                    PreparedStatement ps = con.prepareStatement("insert into photogallery values(?,?,?,?)");
+                    ps.setString(1, FileToUpload);
+                    ps.setString(2,email);
+                    ps.setString(3, label);
+                    ps.setString(4, description);
                     int i = ps.executeUpdate();
-
-                   if (i > 0) {
-                        response.sendRedirect("home.jsp");
+                    if (i > 0) {
+                        response.sendRedirect("profile.jsp");
                     } else {
-                        out.println("Profile Picture not updated.");
+                        response.sendRedirect("error.jsp");
 
                     }
                 }
